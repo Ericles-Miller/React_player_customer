@@ -2,7 +2,6 @@ import React from 'react';
 import './ControlIcons.css';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import { IconButton } from '@mui/material';
@@ -12,18 +11,18 @@ import { PlayArrowSharp } from '@mui/icons-material';
 import { PauseSharp } from '@mui/icons-material';
 import { VolumeUp } from '@mui/icons-material';
 import { VolumeOff } from '@mui/icons-material';
-import Popover from '@mui/material/Popover';
 import Tooltip from '@mui/material/Tooltip';
 
-const ControlIcons = ({ playandpause, playing, rewind, fastForward, muting, muted, volumeChange, volumeSeek, volume, playRate, playerbackRate, fullScreenMode, onSeek, played, onSeekMouseUp, onSeekMouseDown, fullMovieTime, playedTime}) => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const handlePopOver = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+const ControlIcons = ({ playandpause, playing, rewind, fastForward, muting, muted, volumeChange, volumeSeek, volume, onSeek, played, onSeekMouseUp, onSeekMouseDown, fullMovieTime, playedTime}) => {
+    const [anchorEl] = React.useState(null);
+    
+    // const handlePopOver = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    // };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // };
 
     const open = Boolean(anchorEl);
     const id = open ? 'playbackrate-popover' : undefined;
@@ -129,6 +128,40 @@ const ControlIcons = ({ playandpause, playing, rewind, fastForward, muting, mute
                 <Grid container direction='row' justifyContent='space-between'>
                   <Typography variant='h7' style={{color:'white'}}>{playedTime}</Typography>
                   <Typography variant='h7' style={{color:'white'}}>{fullMovieTime}</Typography>
+                </Grid>
+              </Grid>
+
+              <Grid item>
+                <Grid container alignItems='center' direction='row'>
+                  <IconButton className='controls__icons' aria-label='reqind' onClick={playandpause}>
+                    {
+                      playing ? (
+                        <PauseSharp fontSize='large' style={{color:'white'}}/>
+                      ) : (
+                        <PlayArrowSharp fontSize='large' style={{color:'white'}}/>
+                      )
+                    }
+                  </IconButton>
+
+                  <IconButton className='controls__icons' aria-label='reqind' onClick={muting}>
+                    {
+                      muted ? (
+                        <VolumeOff fontSize='large' style={{color:'white'}}/>
+                      ) : (
+                        <VolumeUp fontSize='large' style={{color:'white'}}/>
+                      )
+                    }
+                  </IconButton>
+
+                  <Typography style={{color:'#fff', paddingTop:'5px'}}>{volume * 100}</Typography>
+                  <Slider
+                    min={0}
+                    max={100}
+                    value={volume * 100}
+                    onChange={volumeChange}
+                    onChangeCommitted={volumeSeek}
+                    className='volume__slider'
+                  />                               
                 </Grid>
               </Grid>
             </Grid>

@@ -30,14 +30,14 @@ function App() {
     playing: true,
     muted: true,
     volume: 0.5,
-    playerbackRate:1.0,
+    //playerbackRate:1.0,
     played:0,
     seeking: false,
   })
 
 
   //Destructure State in other to get the values in it
-  const { playing, muted, volume, playerbackRate, played, seeking } = playerstate;
+  const { playing, muted, volume, played, seeking } = playerstate;
   const playerRef = useRef(null);
   const playerDivRef = useRef(null);
 
@@ -66,13 +66,13 @@ function App() {
     setPlayerState({...playerstate, volume:parseFloat(newValue/100), muted:newValue === 0 ? true : false, });
   }
 
-  const handlePlayerRate = (rate) => {
-    setPlayerState({...playerstate, playerbackRate: rate});
-  }
+  // const handlePlayerRate = (rate) => {
+  //   setPlayerState({...playerstate, playerbackRate: rate});
+  // }
 
-  const handleFullScreenMode = () => {
-    screenfull.toggle(playerDivRef.current)
-  }
+  // const handleFullScreenMode = () => {
+  //   screenfull.toggle(playerDivRef.current)
+  // }
 
   const handlePlayerProgress = (state) => {
     console.log('onProgress', state);
@@ -112,7 +112,7 @@ function App() {
           url='video/SimuladordeAltura__Editado.mp4'
           playing={playing}
           volume={volume} 
-          playbackRate={playerbackRate}
+          //playbackRate={playerbackRate}
           onProgress={handlePlayerProgress}
           muted={muted}/>
 
@@ -127,9 +127,9 @@ function App() {
            muted={muted}
            volumeChange={handleVolumeChange}
            volumeSeek={handleVolumeSeek}
-           playerbackRate={playerbackRate}
-           playRate={handlePlayerRate}
-           fullScreenMode={handleFullScreenMode}
+           //playerbackRate={playerbackRate}
+           //playRate={handlePlayerRate}
+           //fullScreenMode={handleFullScreenMode}
            played={played}
            onSeek={handlePlayerSeek}  
            onSeekMouseUp={handlePlayerMouseSeekUp}
